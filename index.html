@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡單待辦事項列表</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #content {
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h1>待辦事項列表</h1>
+        <input type="text" id="taskInput" placeholder="輸入任務">
+        <button onclick="addTask()">添加任務</button>
+        <button onclick="goToNextPage()">樂透</button>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        function goToNextPage() {
+            window.location.href = "lottery/lottery.html";
+        }
+        function addTask() {
+            var taskInput = document.getElementById('taskInput');
+            var taskList = document.getElementById('taskList');
+
+            if (taskInput.value.trim() !== '') {
+                var taskItem = document.createElement('li');
+                taskItem.textContent = taskInput.value;
+
+                var deleteButton = document.createElement('button');
+                deleteButton.textContent = '刪除';
+                deleteButton.classList.add('delete-btn');
+                deleteButton.onclick = function () {
+                    taskList.removeChild(taskItem);
+                };
+
+                taskItem.appendChild(deleteButton);
+                taskList.appendChild(taskItem);
+                taskInput.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
