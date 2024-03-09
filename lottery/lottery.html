@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #image-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #image-container img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+<body>
+    <button onclick="goToHomePage()">主頁</button>
+  <div id="image-container">
+    <img id="current-image" src="第1號數字.png" alt="Image">
+  </div>
+
+  <script>
+    let currentIndex = 1;
+    const maxIndex = 6; // 假設最大數字為10，請根據你的實際情況調整
+    function goToHomePage() {
+            window.location.href = "../index.html";
+        }
+    function showImage(direction) {
+      currentIndex += direction;
+      if (currentIndex < 1) {
+        currentIndex = maxIndex;
+      } else if (currentIndex > maxIndex) {
+        currentIndex = 1;
+      }
+
+      const imagePath = `第${currentIndex}號數字.png`;
+      document.getElementById('current-image').src = imagePath;
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') {
+        showImage(1);
+      } else if (event.key === 'ArrowLeft') {
+        showImage(-1);
+      }
+    });
+
+    document.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+      showImage(1);
+    });
+
+    document.addEventListener('click', (event) => {
+      if (event.button === 0) {
+        showImage(-1);
+      }
+    });
+  </script>
+</body>
+</html>
